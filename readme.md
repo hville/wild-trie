@@ -10,7 +10,7 @@ import WildTrie from 'wild-trie'
 var trie = new WildTrie({
   //path: any function that returns an array of keys of any type
   path: function(pointer) { return pointer.split('/').slice(1) },
-  //wild: any value to use as wildcard (strict equality ===)
+  //wild: any value to use as wildcard Key (equality is based on the "SameValueZero" algorithm)
   wild: '*'
 })
 
@@ -35,11 +35,7 @@ console.assert(trie.all('/z/z'), [])
 * available in CommonJS and ES6 modules
   * CJS: `var WildTrie = require('wild-trie')`
   * ES modules: `import WildTrie from 'wild-trie'`
-
-* only the last item of an Array can be deleted to avoid shifting of keys
-* No Array splicing to keep the keys unchanged. additions and removals from the end only (eg. push pop)
-* only JSON types supported (Array, Object, string, number, boolean, null)
-* set triggers a deletion if the value is undefined and/or absent
+* wildcard and key equality based on the "SameValueZero" algorithms (same as `Map`)
 
 
 ## API
